@@ -20,58 +20,60 @@ export default class Main extends React.Component {
     }
 
     componentDidMount() {
-        this.getUsers();
+        // this.getUsers();
         this.getFields();
-        this.getQuestions();
-        this.getAnswers();
-        this.getCredentials()
+        // this.getQuestions();
+        // this.getAnswers();
+        // this.getCredentials()
     }
 
-    getUsers = () => {
-        fetch('http://localhost:3000/users')
-    .then(res => res.json())
-    .then(users => this.setState({users}))
-    }
+    // getUsers = () => {
+    //     fetch('http://localhost:3000/users')
+    // .then(res => res.json())
+    // .then(users => this.setState({users}))
+    // }
 
-    createUser = (user) => {
-        fetch('http://localhost:3000/users', {
-            method: 'POST',
-            headers: {
-                accept: 'application/json',
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
-        .then(res => res.json())
-        .then(user => {
-           let users = [user, ...this.state.users]
-           this.setState({users, currentUser: user})
-        })
-    }
+    // createUser = (user) => {
+    //     fetch('http://localhost:3000/users', {
+    //         method: 'POST',
+    //         headers: {
+    //             accept: 'application/json',
+    //             'content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify(user)
+    //     })
+    //     .then(res => res.json())
+    //     .then(user => {
+    //        let users = [user, ...this.state.users]
+    //        this.setState({users, currentUser: user})
+    //     })
+    // }
 
     getFields = () => {
-        fetch('http://localhost:3000/fields')
+        fetch('http://localhost:3000/fields', {
+            credentials: 'include'
+        })
     .then(res => res.json())
     .then(fields => this.setState({fields}))
     }
 
-    getQuestions = () => {
-        fetch('http://localhost:3000/questions')
-    .then(res => res.json())
-    .then(questions => this.setState({questions}))
-    }
+    // getQuestions = () => {
+    //     fetch('http://localhost:3000/questions')
+    // .then(res => res.json())
+    // .then(questions => this.setState({questions}))
+    // }
 
-    getAnswers = () => {
-        fetch('http://localhost:3000/answers')
-    .then(res => res.json())
-    .then(answers => this.setState({answers}))
-    }
+    // getAnswers = () => {
+    //     fetch('http://localhost:3000/answers')
+    // .then(res => res.json())
+    // .then(answers => this.setState({answers}))
+    // }
 
-    getCredentials = () => {
-        fetch('http://localhost:3000/credentials')
-    .then(res => res.json())
-    .then(credentials => this.setState({credentials}))
-    }
+    // getCredentials = () => {
+    //     fetch('http://localhost:3000/credentials')
+    // .then(res => res.json())
+    // .then(credentials => this.setState({credentials}))
+    // }
 
 
     handleSearch = (e)=> {

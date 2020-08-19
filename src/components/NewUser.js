@@ -37,7 +37,11 @@ export default class NewUser extends React.Component {
             password_digest: this.state.password,
             field: this.state.field
         }
+        if (field === 'none') {
         createUser(user)
+        } else {
+            handleCredentials(user)
+        }
       }
     
       render() {
