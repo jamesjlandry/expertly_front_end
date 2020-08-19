@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import UserDetails from '../components/UserDetails'
 
 export default class ProfileBox extends React.Component {
@@ -9,7 +10,7 @@ export default class ProfileBox extends React.Component {
         return (
             <div>
                 
-            </div>
+            </div>    
         )
     }
 

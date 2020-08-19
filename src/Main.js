@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import {Link} from 'react-router-dom';
 import FieldsContainer from './containers/FieldsContainer'
 import QuestionsContainer from './containers/QuestionsContainer'
 import Search from './components/Search'
@@ -14,8 +16,7 @@ export default class Main extends React.Component {
           answers:[],
           fields: [],
           users: [],
-          search: '',
-          currentUser: {}
+          search: ''
         }
     }
 
@@ -33,21 +34,7 @@ export default class Main extends React.Component {
     .then(users => this.setState({users}))
     }
 
-    createUser = (user) => {
-        fetch('http://localhost:3000/users', {
-            method: 'POST',
-            headers: {
-                accept: 'application/json',
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
-        .then(res => res.json())
-        .then(user => {
-           let users = [user, ...this.state.users]
-           this.setState({users, currentUser: user})
-        })
-    }
+   
 
     getFields = () => {
         fetch('http://localhost:3000/fields')
@@ -73,6 +60,30 @@ export default class Main extends React.Component {
     .then(credentials => this.setState({credentials}))
     }
 
+     handleClick = () => {
+        axios.delete('http://localhost:3000/logout', {withCredentials: true})
+        .then(response => {
+          this.props.handleLogout()
+          this.props.history.push('/')
+        })
+        .catch(error => console.log(error))
+      }
+
+    handleLogin = (data) => {
+        this.setState({
+          isLoggedIn: true,
+          currentUser: data.currentUser
+        })
+      }
+
+    handleLogout = () => {
+        this.setState({
+        isLoggedIn: false,
+        currentUser: {}
+        })
+      }
+
+     
 
     handleSearch = (e)=> {
         this.setState({search: e.target.value.toLowerCase()})
@@ -89,6 +100,15 @@ export default class Main extends React.Component {
 
         return (
             <div>
+                <Link to='/login'>Log In</Link>
+                    <br></br>
+                <Link to='/signup'>Sign Up</Link>
+                <br></br>
+                { 
+                    this.props.loggedInStatus ? 
+                    <Link to='/logout' onClick={this.handleClick}>Log Out</Link> : 
+                    null
+                 }
                 < Search handleSearch={this.handleSearch}/> 
                 < FieldsContainer fields={actualFields} filterField={this.filterField}/> 
                 < QuestionsContainer questions={this.state.filteredQuestions}/>
