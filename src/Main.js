@@ -3,6 +3,8 @@ import FieldsContainer from './containers/FieldsContainer'
 import QuestionsContainer from './containers/QuestionsContainer'
 import Search from './components/Search'
 import ProfileBox from './containers/ProfileBox'
+import NewUser from './components/NewUser'
+import CredentialsForm from './components/CredentialsForm'
 
 export default class Main extends React.Component {
     
@@ -16,7 +18,9 @@ export default class Main extends React.Component {
           users: [],
           search: '',
           currentUser: {},
-          loggedIn: false
+          loggedIn: false, 
+          modal: false,
+          credentialModal: false
         }
     }
 
@@ -43,7 +47,15 @@ export default class Main extends React.Component {
         .then(user => {
            let users = [user, ...this.state.users]
            this.setState({users, currentUser: user})
+           
         })
+        .then(sessionStorage.setItem('user_name', this.state.currentUser.name))
+    }
+
+ 
+
+    handleCredentials = (user) => {
+        this.setState({credentialModal: !this.state.credentialModal, modal: !this.state.modal})
     }
 
     getFields = () => {
@@ -87,6 +99,13 @@ export default class Main extends React.Component {
     }
 
 
+    showModal = () => {
+        this.setState({
+            modal: !this.state.modal
+        })
+    }
+
+
     handleSearch = (e)=> {
         this.setState({search: e.target.value.toLowerCase()})
     }
@@ -102,15 +121,14 @@ export default class Main extends React.Component {
 
         return (
             <div>
+                < ProfileBox userLoggedIn={this.state.loggedIn} username={this.state.username} showModal={this.showModal} createUser={this.createUser}/>
                 < Search handleSearch={this.handleSearch}/> 
                 < FieldsContainer fields={actualFields} filterField={this.filterField}/> 
                 < QuestionsContainer questions={this.state.filteredQuestions}/>
-                < ProfileBox userLoggedIn={this.state.loggedIn} username={this.state.username} createUser={this.createUser}/>
+                {this.state.modal ? < NewUser createUser={this.createUser} handleCredentials={this.handleCredentials}/> : null }
+                {this.state.credentialsModal ? < CredentialsForm createExpert={this.createExpert} /> : null }
             </div>
         )
     }
-
-
-
 
 }
