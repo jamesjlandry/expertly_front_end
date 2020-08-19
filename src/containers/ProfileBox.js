@@ -4,13 +4,43 @@ import UserDetails from '../components/UserDetails'
 
 export default class ProfileBox extends React.Component {
 
-   
+   state = {
+       showLogin: false,
+       username: '',
+       password: ''
+   }
+
+   handleLogin = () => {
+       this.setState({showLogin: !this.state.showLogin})
+   }
+
+   setUsername = (e) => {
+       this.setState({
+           username: e.target.value
+       })
+   }
+
+   setPassword = (e) => {
+       this.setState({
+           password: e.target.value
+       })
+   }
+
+   submitLogin = () => {
+      
+   }
 
     render () {
 
         return (
             <div>
-               {this.props.userLoggedIn ? <div className="displayLoggedInOutUser" >{this.props.username}</div> : <div className="displayLoggedInOutUser">Log In</div>}
+               {this.props.userLoggedIn ? <div className="displayLoggedInOutUser" >{this.props.username}</div> : <div className="displayLoggedInOutUser" onClick={ () => this.handleLogin()}>Log In</div>}
+               {this.state.showLogin ?  <div className="login_form">
+                                            <input onChange={(event) => this.setUsername(event)} type="text" placeholder= "username" value={this.state.username}></input>
+                                            <input onChange={(event) => this.setPassword(event)} type="password" placeholder= "password" value={this.state.password}></input>
+                                            <button onClick={this.submitLogin} className= "login_button" > Make It So</button>
+
+                                        </div> : null}
                 <div className="createUserAccount" onClick={() => this.props.showModal()}>Create New Account</div>
             </div>
         )

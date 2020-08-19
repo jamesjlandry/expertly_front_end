@@ -105,6 +105,9 @@ export default class Main extends React.Component {
         })
     }
 
+    handleLogin = () => {
+        
+    }
 
     handleSearch = (e)=> {
         this.setState({search: e.target.value.toLowerCase()})
@@ -121,7 +124,7 @@ export default class Main extends React.Component {
 
         return (
             <div>
-                < ProfileBox userLoggedIn={this.state.loggedIn} username={this.state.username} showModal={this.showModal} createUser={this.createUser}/>
+                < ProfileBox userLoggedIn={this.state.loggedIn} username={this.state.username} showModal={this.showModal} createUser={this.createUser} handleLogin={this.handleLogin}/>
                 < Search handleSearch={this.handleSearch}/> 
                 < FieldsContainer fields={actualFields} filterField={this.filterField}/> 
                 < QuestionsContainer questions={this.state.filteredQuestions}/>
