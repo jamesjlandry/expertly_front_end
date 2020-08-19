@@ -15,39 +15,36 @@ export default class Main extends React.Component {
           fields: [],
           users: [],
           search: '',
-          currentUser: {}
+          currentUser: {},
+          loggedIn: false
         }
     }
 
     componentDidMount() {
-        // this.getUsers();
+        this.getUsers();
         this.getFields();
-        // this.getQuestions();
-        // this.getAnswers();
-        // this.getCredentials()
+        this.getQuestions();
+        this.getAnswers();
+        this.getCredentials()
     }
 
-    // getUsers = () => {
-    //     fetch('http://localhost:3000/users')
-    // .then(res => res.json())
-    // .then(users => this.setState({users}))
-    // }
+  
 
-    // createUser = (user) => {
-    //     fetch('http://localhost:3000/users', {
-    //         method: 'POST',
-    //         headers: {
-    //             accept: 'application/json',
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(user)
-    //     })
-    //     .then(res => res.json())
-    //     .then(user => {
-    //        let users = [user, ...this.state.users]
-    //        this.setState({users, currentUser: user})
-    //     })
-    // }
+    createUser = (user) => {
+        fetch('http://localhost:3000/users', {
+            method: 'POST',
+            headers: {
+                accept: 'application/json',
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(user => {
+           let users = [user, ...this.state.users]
+           this.setState({users, currentUser: user})
+        })
+    }
 
     getFields = () => {
         fetch('http://localhost:3000/fields', {
@@ -57,23 +54,37 @@ export default class Main extends React.Component {
     .then(fields => this.setState({fields}))
     }
 
-    // getQuestions = () => {
-    //     fetch('http://localhost:3000/questions')
-    // .then(res => res.json())
-    // .then(questions => this.setState({questions}))
-    // }
+    getQuestions = () => {
+        fetch('http://localhost:3000/questions', {
+            credentials: 'include'
+        })
+    .then(res => res.json())
+    .then(questions => this.setState({questions}))
+    }
 
-    // getAnswers = () => {
-    //     fetch('http://localhost:3000/answers')
-    // .then(res => res.json())
-    // .then(answers => this.setState({answers}))
-    // }
+    getAnswers = () => {
+        fetch('http://localhost:3000/answers', {
+            credentials: 'include'
+        })
+    .then(res => res.json())
+    .then(answers => this.setState({answers}))
+    }
 
-    // getCredentials = () => {
-    //     fetch('http://localhost:3000/credentials')
-    // .then(res => res.json())
-    // .then(credentials => this.setState({credentials}))
-    // }
+    getCredentials = () => {
+        fetch('http://localhost:3000/credentials', {
+            credentials: 'include'
+        })
+    .then(res => res.json())
+    .then(credentials => this.setState({credentials}))
+    }
+
+    getUsers = () => {
+        fetch('http://localhost:3000/users', {
+            credentials: 'include'
+        })
+    .then(res => res.json())
+    .then(users => this.setState({users}))
+    }
 
 
     handleSearch = (e)=> {
@@ -94,7 +105,7 @@ export default class Main extends React.Component {
                 < Search handleSearch={this.handleSearch}/> 
                 < FieldsContainer fields={actualFields} filterField={this.filterField}/> 
                 < QuestionsContainer questions={this.state.filteredQuestions}/>
-                < ProfileBox createUser={this.createUser}/>
+                < ProfileBox userLoggedIn={this.state.loggedIn} username={this.state.username} createUser={this.createUser}/>
             </div>
         )
     }
