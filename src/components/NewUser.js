@@ -40,6 +40,7 @@ export default class NewUser extends React.Component {
         if (this.state.field === 'none') {
         this.props.createUser(user)
         } else {
+          console.log(user)
             this.props.createUser(user)
             this.props.handleCredentials(user)
         }
