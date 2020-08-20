@@ -1,14 +1,108 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
+  padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: lightgray
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: lightblue
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.header {
+  display: flex;
+  flex-flow: column wrap;
+  position: relative;
+
+  align-content: center;
+
+  align-items: center;
+  text-align: center;
+
+  margin-bottom: 2%;
+
+  font-family: 'Kanit', sans-serif;
+  color: lightblue;
+
+  background: rgba(85, 85, 199, 0.6);
+
+  box-shadow: 0 2px 4px 2px rgba(85, 85, 199, 0.8);
+}
+
+.expert_fields {
+  display: flex;
+  flex-flow: column wrap;
+  position: relative;
+  float: left;
+
+  overflow-x: hidden;
+
+  height: 60%;
+  width: 20%;
+
+  align-content: center;
+  justify-content: space-between;
+
+  align-items: center;
+  text-align: center;
+
+  margin-top: 5px;
+  margin-left: 2%;
+
+  border: 1px solid rgba(85, 85, 199, 0.6);
+  border-radius: 2%;
+
+  background-color: lightcyan;
+
+  box-shadow: 1px 2px 5px 1px rgba(85, 85, 199, 0.4);
+}
+
+.field_li {
+  display: flex;
+  flex-flow: column wrap;
+  
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+
+  height: 30px;
+  width: 100%;
+}
+
+.inner_field_li {
+  display: flex;
+  flex-flow: column wrap;
+  
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+
+  font-family: 'Chivo', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(19, 41, 114)
+}
+
+.field_li:hover {
+  background-color: lightblue;
+
+  border-left: 10px solid rgba(72, 72, 165, 0.8);
+
+  box-shadow: 0 0 4px rgba(85, 85, 199, 0.4);
+}
+
+.question_button {
+  float: right;
+
+  height: 30px;
+  width: 140px
 }
