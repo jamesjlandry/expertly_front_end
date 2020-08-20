@@ -5,6 +5,7 @@ import Search from './components/Search'
 import ProfileBox from './containers/ProfileBox'
 import NewUser from './components/NewUser'
 import CredentialsForm from './components/CredentialsForm'
+import Header from './containers/Header'
 
 export default class Main extends React.Component {
     
@@ -234,6 +235,7 @@ export default class Main extends React.Component {
 
         return (
             <div>
+                < Header />
                 < ProfileBox userLoggedIn={this.state.loggedIn} handleLogout={this.handleLogout} currentUser={this.state.currentUser} showModal={this.showModal} createUser={this.createUser} userLogin={this.userLogin}/>
                 < Search handleSearch={this.handleSearch}/> 
                 < FieldsContainer fields={actualFields} unfilterField={this.unfilterField} filterField={this.filterField} currentUser={this.state.currentUser}/> 
