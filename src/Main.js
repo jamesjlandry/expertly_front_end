@@ -55,7 +55,7 @@ export default class Main extends React.Component {
         let currentUser = await response.json()
         this.setState({
             currentUser,
-            loggedIn: true
+            loggedIn:
         })
     }
 
@@ -150,7 +150,7 @@ export default class Main extends React.Component {
 
         return (
             <div>
-                < ProfileBox userLoggedIn={this.state.loggedIn} username={this.state.currentUser} showModal={this.showModal} createUser={this.createUser} handleLogin={this.handleLogin}/>
+                < ProfileBox userLoggedIn={this.state.loggedIn} username={this.state.username} showModal={this.showModal} createUser={this.createUser} handleLogin={this.handleLogin}/>
                 < Search handleSearch={this.handleSearch}/> 
                 < FieldsContainer fields={actualFields} filterField={this.filterField}/> 
                 < QuestionsContainer questions={this.state.filteredQuestions}/>
