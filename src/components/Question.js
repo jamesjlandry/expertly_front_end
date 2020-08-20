@@ -9,7 +9,7 @@ export default class Question extends React.Component {
         return (
             <div className="questionBox">
                 <div>{this.props.question.text}</div>
-                <button>
+                <button className='answer_button'>
                     Answer Question
                 </button>
             </div>

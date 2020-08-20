@@ -15,7 +15,7 @@ export default class Main extends React.Component {
           filteredQuestions: [],
           answers:[],
           fields: [],
-          users: [],
+          
           search: '',
           currentUser: {},
           loggedIn: false, 
@@ -25,7 +25,6 @@ export default class Main extends React.Component {
     }
 
     componentDidMount() {
-        this.getUsers();
         this.getFields();
         this.getQuestions();
         this.getAnswers();
@@ -75,7 +74,6 @@ export default class Main extends React.Component {
            this.setState({users, currentUser: user, loggedIn: true})
            
         })
-        
     }
 
  
@@ -131,12 +129,50 @@ export default class Main extends React.Component {
         })
     }
 
-    handleLogin = () => {
+    userLogin = async (user) => {
+        let response = await fetch('http://localhost:3000/login', {
+            'credentials': 'include',
+            method: "POST",
+            headers: {
+               accept: 'application/json',
+               'content-type': 'application/json' 
+            },
+            body: JSON.stringify(user)
+        })
+        let currentUser = await response.json()
+        this.setState({
+            currentUser,
+            loggedIn: true
+        })
+    }
 
+    handleLogout = async () => {
+        let response = await fetch('http://localhost:3000/logout', {
+            credentials: 'include',
+            method: 'DELETE'
+        })
+        let loggedOut = await response.json()
+        console.log(loggedOut)
+        this.setState({
+            currentUser: {},
+            loggedIn: false 
+        })
     }
 
     handleSearch = (e)=> {
         this.setState({search: e.target.value.toLowerCase()})
+    }
+
+    createQuestion = async (question) => {
+        let response = await fetch('http://localhost:3000/questions', {
+            credentials: 'include',
+            method: 'POST',
+            headers: {
+                accept: 'application/json',
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(question)
+        })
     }
 
     filterField = (fieldType) => {
@@ -150,10 +186,10 @@ export default class Main extends React.Component {
 
         return (
             <div>
-                < ProfileBox userLoggedIn={this.state.loggedIn} username={this.state.currentUser} showModal={this.showModal} createUser={this.createUser} handleLogin={this.handleLogin}/>
+                < ProfileBox userLoggedIn={this.state.loggedIn} handleLogout={this.handleLogout} username={this.state.currentUser} showModal={this.showModal} createUser={this.createUser} userLogin={this.userLogin}/>
                 < Search handleSearch={this.handleSearch}/> 
                 < FieldsContainer fields={actualFields} filterField={this.filterField}/> 
-                < QuestionsContainer questions={this.state.filteredQuestions}/>
+                < QuestionsContainer currentUser={this.state.currentUser} questions={this.state.filteredQuestions} createQuestion={this.createQuestion}/>
                 {this.state.modal ? < NewUser createUser={this.createUser} handleCredentials={this.handleCredentials}/> : null }
                 {this.state.credentialsModal ? < CredentialsForm createExpert={this.createExpert} /> : null }
             </div>
