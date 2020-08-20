@@ -30,12 +30,38 @@ export default class Main extends React.Component {
         this.getQuestions();
         this.getAnswers();
         this.getCredentials()
+        this.loggedIn()
     }
 
+    // // what strong params is looking for
+    // // the request body *contains* the user
+    // body = {
+    //     user: {
+    //         username: 'James'
+    //     }
+    // }
   
+
+    // // what you're sending
+    // // the request body *is* the user
+    // body = {
+    //     username: 'James'
+    // }
+
+    loggedIn = async () => {
+        let response = await fetch('http://localhost:3000/logged_in', {
+            'credentials': 'include'
+        })
+        let currentUser = await response.json()
+        this.setState({
+            currentUser,
+            loggedIn: true
+        })
+    }
 
     createUser = (user) => {
         fetch('http://localhost:3000/users', {
+            credentials: 'include',
             method: 'POST',
             headers: {
                 accept: 'application/json',
@@ -46,10 +72,10 @@ export default class Main extends React.Component {
         .then(res => res.json())
         .then(user => {
            let users = [user, ...this.state.users]
-           this.setState({users, currentUser: user})
+           this.setState({users, currentUser: user, loggedIn: true})
            
         })
-        .then(sessionStorage.setItem('user_name', this.state.currentUser.name))
+        
     }
 
  
@@ -106,7 +132,7 @@ export default class Main extends React.Component {
     }
 
     handleLogin = () => {
-        
+
     }
 
     handleSearch = (e)=> {
@@ -124,7 +150,7 @@ export default class Main extends React.Component {
 
         return (
             <div>
-                < ProfileBox userLoggedIn={this.state.loggedIn} username={this.state.username} showModal={this.showModal} createUser={this.createUser} handleLogin={this.handleLogin}/>
+                < ProfileBox userLoggedIn={this.state.loggedIn} username={this.state.currentUser} showModal={this.showModal} createUser={this.createUser} handleLogin={this.handleLogin}/>
                 < Search handleSearch={this.handleSearch}/> 
                 < FieldsContainer fields={actualFields} filterField={this.filterField}/> 
                 < QuestionsContainer questions={this.state.filteredQuestions}/>

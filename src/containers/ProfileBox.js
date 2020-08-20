@@ -34,7 +34,7 @@ export default class ProfileBox extends React.Component {
 
         return (
             <div>
-               {this.props.userLoggedIn ? <div className="displayLoggedInOutUser" >{this.props.username}</div> : <div className="displayLoggedInOutUser" onClick={ () => this.handleLogin()}>Log In</div>}
+               {this.props.userLoggedIn ? <div className="displayLoggedInOutUser" >{this.props.username.username}</div> : <div className="displayLoggedInOutUser" onClick={ () => this.handleLogin()}>Log In</div>}
                {this.state.showLogin ?  <div className="login_form">
                                             <input onChange={(event) => this.setUsername(event)} type="text" placeholder= "username" value={this.state.username}></input>
                                             <input onChange={(event) => this.setPassword(event)} type="password" placeholder= "password" value={this.state.password}></input>
