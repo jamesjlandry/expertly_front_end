@@ -69,8 +69,7 @@ export default class Main extends React.Component {
         })
         .then(res => res.json())
         .then(user => {
-           let users = [user, ...this.state.users]
-           this.setState({users, currentUser: user, loggedIn: true})
+           this.setState({ currentUser: user, loggedIn: true})
            
         })
     }
@@ -113,13 +112,13 @@ export default class Main extends React.Component {
     .then(credentials => this.setState({credentials}))
     }
 
-    getUsers = () => {
-        fetch('http://localhost:3000/users', {
-            credentials: 'include'
-        })
-    .then(res => res.json())
-    .then(users => this.setState({users}))
-    }
+    // getUsers = () => {
+    //     fetch('http://localhost:3000/users', {
+    //         credentials: 'include'
+    //     })
+    // .then(res => res.json())
+    // .then(users => this.setState({users}))
+    // }
 
 
     showModal = () => {
@@ -139,10 +138,15 @@ export default class Main extends React.Component {
             body: JSON.stringify(user)
         })
         let currentUser = await response.json()
+        if (currentUser.error === "Not Found") {
+            alert('User Not Found')
+
+        } else {
         this.setState({
             currentUser,
             loggedIn: true
-        })
+        }
+        )}
     }
 
     handleLogout = async () => {
@@ -173,6 +177,9 @@ export default class Main extends React.Component {
             body: JSON.stringify({question: question})
         })
         let newQuestion = await response.json()
+        this.setState({
+            questions: [newQuestion, ...this.state.questions]
+        })
        
     }
 
@@ -186,13 +193,39 @@ export default class Main extends React.Component {
             },
             body: JSON.stringify({answer: answer})
         })
-        let newQuestion = await response.json()
+        let newAnswer = await response.json()
+        this.setState({
+            answers: [newAnswer, ...this.state.answers]
+        })
        
     }
 
-    filterField = (fieldType) => {
-        let  filteredQuestions = this.state.questions.filter(question => question.field_id === fieldType.id)
+    createExpert = (credentials) => {
+        fetch('http://localhost:3000/credentials', {
+            credentials: 'include',
+            method: 'POST',
+            headers: {
+                accept: 'application/json',
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({credentials, user_id: this.state.currentUser.id})
+        })
+        .then(res => res.json())
+        .then(currentUser => {
+            this.setState({currentUser})
+        })
+        this.handleCredentials()
+    }
+
+    filterField = (field_id) => {
+        let  filteredQuestions = this.state.questions.filter(question => question.field_id === field_id)
         this.setState({filteredQuestions})
+    }
+
+    unfilterField = () => {
+        this.setState({
+            filteredQuestions: this.state.questions
+        })
     }
 
     render () {
@@ -203,10 +236,10 @@ export default class Main extends React.Component {
             <div>
                 < ProfileBox userLoggedIn={this.state.loggedIn} handleLogout={this.handleLogout} currentUser={this.state.currentUser} showModal={this.showModal} createUser={this.createUser} userLogin={this.userLogin}/>
                 < Search handleSearch={this.handleSearch}/> 
-                < FieldsContainer fields={actualFields} filterField={this.filterField} currentUser={this.state.currentUser}/> 
-                < QuestionsContainer currentUser={this.state.currentUser} questions={this.state.filteredQuestions} createQuestion={this.createQuestion}/>
+                < FieldsContainer fields={actualFields} unfilterField={this.unfilterField} filterField={this.filterField} currentUser={this.state.currentUser}/> 
+                < QuestionsContainer answers={this.state.answers} currentUser={this.state.currentUser} questions={this.state.filteredQuestions} createQuestion={this.createQuestion} createAnswer={this.createAnswer}/>
                 {this.state.modal ? < NewUser createUser={this.createUser} handleCredentials={this.handleCredentials}/> : null }
-                {this.state.credentialsModal ? < CredentialsForm createExpert={this.createExpert} currentUser={this.state.currentUser}/> : null }
+                {this.state.credentialModal ? < CredentialsForm createExpert={this.createExpert} currentUser={this.state.currentUser}/> : null }
             </div>
         )
     }

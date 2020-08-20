@@ -11,21 +11,9 @@ export default class Credentials extends React.Component {
           
         };
       }
-      createExpert = (credentials) => {
-        fetch('http://localhost:3000/users', {
-            method: 'POST',
-            headers: {
-                accept: 'application/json',
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(credentials)
-        })
-        .then(res => res.json())
-        .then(credential => {
-           let credentials = [credential, ...this.state.credentials]
-           this.setState({credentials})
-        })
-    }
+  
+
+
       degreeChange = (e) => {
           this.setState({
               degree: e.target.value
@@ -51,7 +39,8 @@ export default class Credentials extends React.Component {
             yearsInField: this.state.yearsInField,
             user_id: this.props.currentUser.id
         }
-        this.createExpert(credentials)
+        this.props.createExpert(credentials)
+        
       }
     
       render() {
