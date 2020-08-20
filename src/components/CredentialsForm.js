@@ -49,7 +49,7 @@ export default class Credentials extends React.Component {
         let credentials = {
             degree: this.state.degree,
             yearsInField: this.state.yearsInField,
-            user_id: 'bob'
+            user_id: this.props.currentUser.id
         }
         this.createExpert(credentials)
       }

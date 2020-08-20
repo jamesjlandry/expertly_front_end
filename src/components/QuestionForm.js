@@ -6,7 +6,7 @@ export default class QuestionForm extends React.Component {
         super();
     
         this.state = {
-          fieldType: '',
+          fieldType: 0,
           text: '',
           
         };
@@ -27,9 +27,10 @@ export default class QuestionForm extends React.Component {
 
       handleSubmit = (e) => {
           e.preventDefault();
+          let fieldID = parseInt(this.state.fieldType)
         let question = {
             text: this.state.text,
-            field_id: this.state.fieldType,
+            field_id: fieldID,
             user_id: this.props.currentUser.id,
             upvotes: 0
         }
@@ -43,7 +44,18 @@ export default class QuestionForm extends React.Component {
             <div>
               <label>
                 Select Question Field
-                <input onChange={event => this.degreeChange(event)} id="degree" name="degree" type="text" value={this.state.degree}/>
+                <select fieldType={this.state.fieldType} onChange={this.fieldChange}>
+                    <option value=''disabled selected>Make a Selection</option>
+                    <option value='2'>Medical</option>
+                    <option value="3">Psychology</option>
+                    <option value="4">Legal</option>
+                    <option value="5">Electrical Engineering</option>
+                    <option value="6">Software Engineering</option>
+                    <option value="7">Construction</option>
+                    <option value="8">Auto Mechanic</option>
+                    <option value="9">Political Science</option>
+                    <option value="10">Music</option>
+                </select>
               </label>
             </div>
             <div>

@@ -15,7 +15,6 @@ export default class Main extends React.Component {
           filteredQuestions: [],
           answers:[],
           fields: [],
-          
           search: '',
           currentUser: {},
           loggedIn: false, 
@@ -95,7 +94,7 @@ export default class Main extends React.Component {
             credentials: 'include'
         })
     .then(res => res.json())
-    .then(questions => this.setState({questions}))
+    .then(questions => this.setState({questions, filteredQuestions: questions}))
     }
 
     getAnswers = () => {
@@ -171,8 +170,24 @@ export default class Main extends React.Component {
                 accept: 'application/json',
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(question)
+            body: JSON.stringify({question: question})
         })
+        let newQuestion = await response.json()
+       
+    }
+
+    createAnswer = async (answer) => {
+        let response = await fetch('http://localhost:3000/answers', {
+            credentials: 'include',
+            method: 'POST',
+            headers: {
+                accept: 'application/json',
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({answer: answer})
+        })
+        let newQuestion = await response.json()
+       
     }
 
     filterField = (fieldType) => {
@@ -186,12 +201,12 @@ export default class Main extends React.Component {
 
         return (
             <div>
-                < ProfileBox userLoggedIn={this.state.loggedIn} handleLogout={this.handleLogout} username={this.state.currentUser} showModal={this.showModal} createUser={this.createUser} userLogin={this.userLogin}/>
+                < ProfileBox userLoggedIn={this.state.loggedIn} handleLogout={this.handleLogout} currentUser={this.state.currentUser} showModal={this.showModal} createUser={this.createUser} userLogin={this.userLogin}/>
                 < Search handleSearch={this.handleSearch}/> 
-                < FieldsContainer fields={actualFields} filterField={this.filterField}/> 
+                < FieldsContainer fields={actualFields} filterField={this.filterField} currentUser={this.state.currentUser}/> 
                 < QuestionsContainer currentUser={this.state.currentUser} questions={this.state.filteredQuestions} createQuestion={this.createQuestion}/>
                 {this.state.modal ? < NewUser createUser={this.createUser} handleCredentials={this.handleCredentials}/> : null }
-                {this.state.credentialsModal ? < CredentialsForm createExpert={this.createExpert} /> : null }
+                {this.state.credentialsModal ? < CredentialsForm createExpert={this.createExpert} currentUser={this.state.currentUser}/> : null }
             </div>
         )
     }
