@@ -2,7 +2,7 @@ import React from 'react'
 
 const Search = (props) => {
     return (
-      <div className="">
+      <div className="searchBar">
         <input
         onChange={event => props.handleSearch(event)}
           type="text"

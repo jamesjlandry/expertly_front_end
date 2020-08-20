@@ -15,7 +15,7 @@ export default class NewUser extends React.Component {
 
       nameChange = (e) => {
           this.setState({
-              name: e.target.value
+              username: e.target.value
           })
       }
 
@@ -31,22 +31,27 @@ export default class NewUser extends React.Component {
           })
       }
 
-      handleSubmit = () => {
+      handleSubmit = (e) => {
+          e.preventDefault();
         let user = {
             username: this.state.username,
-            password_digest: this.state.password,
-            field: this.state.field
+            password: this.state.password,
         }
-        createUser(user)
+        if (this.state.field === 'none') {
+        this.props.createUser(user)
+        } else {
+            this.props.createUser(user)
+            this.props.handleCredentials(user)
+        }
       }
     
       render() {
         return (
-          <form onSubmit={this.handleSubmit}>
+          <form className="new_user_modal" onSubmit={this.handleSubmit}>
             <div>
               <label>
                 Username
-                <input onChange={event => this.nameChange(event)} id="username" name="username" type="text" value={this.state.name}/>
+                <input onChange={event => this.nameChange(event)} id="username" name="username" type="text" value={this.state.username}/>
               </label>
             </div>
             <div>
@@ -74,5 +79,4 @@ export default class NewUser extends React.Component {
           </form>
         );
       }
-    }
 }

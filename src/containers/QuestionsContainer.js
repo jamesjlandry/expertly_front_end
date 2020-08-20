@@ -7,7 +7,7 @@ export default class QuestionsContainer extends React.Component {
     render () {
 
         return (
-            <div>
+            <div className="questionContainer">
                 {this.props.questions.map(question => <Question key={question.id} question={question}/>)}
             </div>
         )
