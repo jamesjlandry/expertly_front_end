@@ -34,18 +34,21 @@ export default class QuestionsContainer extends React.Component {
                 :
                     null
                 }
-                {
-                    this.props.questions.map(question => 
-                        <Question
-                            key={question.id}
-                            question={question}
-                            currentUser={this.props.currentUser}
-                            answers={this.props.answers}
-                            createAnswer={this.props.createAnswer}
-                            users={this.props.users}
-                        />
-                    )
-                }
+
+                <div className="questions_container" >
+                    {
+                        this.props.questions.map(question => 
+                            <Question
+                                key={question.id}
+                                question={question}
+                                currentUser={this.props.currentUser}
+                                answers={this.props.answers}
+                                createAnswer={this.props.createAnswer}
+                                users={this.props.users}
+                            />
+                        )
+                    }
+                </div>
             </div>
         )
     }
