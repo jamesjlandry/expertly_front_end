@@ -52,18 +52,24 @@ export default class NewUser extends React.Component {
       render() {
         return (
           <form className="login_form" onSubmit={this.handleSubmit}>
-            <div>
-              <label>
-                Username
-                <input className="login_input" onChange={event => this.nameChange(event)} id="username" name="username" type="text" value={this.state.username}/>
-              </label>
-            </div>
-            <div>
-              <label>
-                Password
-                <input className="login_input" onChange={event => this.passwordChange(event)} id="password" name="password" type="password" value={this.state.password}/>
-              </label>
-            </div>
+                <input
+                  className="login_input" 
+                  onChange={event => this.nameChange(event)} 
+                  id="username"
+                  name="username" 
+                  placeholder="username"
+                  type="text" 
+                  value={this.state.username}
+                />
+                <input
+                  className="login_input"
+                  onChange={event => this.passwordChange(event)} 
+                  id="password" 
+                  name="password"
+                  placeholder="password"
+                  type="password" 
+                  value={this.state.password}
+                />
             <div>
                 <select className="login_input" onChange={event => this.fieldChange(event.target.value)} >
                     <option value='1'>Not an Expert</option>
