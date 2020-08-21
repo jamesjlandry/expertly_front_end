@@ -53,7 +53,7 @@ export default class ProfileBox extends React.Component {
 
         return (
             <div className="profile_box">
-                  {
+                {
                     this.state.modal
                 ?
                     <NewUser
