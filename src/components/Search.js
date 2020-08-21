@@ -8,7 +8,6 @@ const Search = (props) => {
           type="text"
           placeholder={"Search Questions"}
         />
-        <i className=""></i>
       </div>
     )
   }
