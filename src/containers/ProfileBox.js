@@ -1,11 +1,13 @@
 import React from 'react';
 import UserDetails from '../components/UserDetails'
 import NewUser from '../components/NewUser'
+import CredentialsForm from '../components/CredentialsForm'
 
 
 export default class ProfileBox extends React.Component {
 
    state = {
+    credentialModal: false,
        showLogin: false,
        modal: false,
        username: '',
@@ -16,7 +18,11 @@ export default class ProfileBox extends React.Component {
     this.setState({
         modal: !this.state.modal
     })
-}
+    }
+
+    handleCredentialModal = () => {
+            this.setState({credentialModal: !this.state.credentialModal})
+    }
 
    handleLogin = () => {
        this.setState({showLogin: !this.state.showLogin})
@@ -51,10 +57,24 @@ export default class ProfileBox extends React.Component {
                     this.state.modal
                 ?
                     <NewUser
-                        createUser={this.createUser}
-                        handleCredentials={this.handleCredentials}
+                        createUser={this.props.createUser}
+                        handleCredentials={this.props.handleCredentials}
+                        handleCredentialModal={this.handleCredentialModal}
+                        hideModal={this.showModal}
                     />
                 : 
+                    null
+                }
+                  {
+                    this.state.credentialModal
+                ? 
+                    <CredentialsForm
+                        createExpert={this.props.createExpert}
+                        currentUser={this.props.currentUser}
+                        fieldId={this.props.credentialFieldId}
+                        handleCredentialModal={this.handleCredentialModal}
+                    />
+                :
                     null
                 }
                {

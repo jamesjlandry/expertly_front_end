@@ -20,7 +20,7 @@ export default class Main extends React.Component {
           currentUser: {},
           loggedIn: false, 
           
-          credentialModal: false,
+          
           credentialFieldId: 1
         }
     }
@@ -80,7 +80,7 @@ export default class Main extends React.Component {
  
 
     handleCredentials = (field_id) => {
-        this.setState({credentialModal: !this.state.credentialModal, modal: !this.state.modal, credentialFieldId: field_id})
+        this.setState({credentialFieldId: field_id})
     }
 
     getFields = () => {
@@ -249,6 +249,8 @@ export default class Main extends React.Component {
                     showModal={this.showModal}
                     createUser={this.createUser}
                     userLogin={this.userLogin}
+                    handleCredentials={this.handleCredentials}
+                    createExpert={this.createExpert}
                 />
                 <FieldsContainer
                     fields={actualFields}
@@ -265,17 +267,7 @@ export default class Main extends React.Component {
                     createAnswer={this.createAnswer}
                 />
               
-                {
-                    this.state.credentialModal
-                ? 
-                    <CredentialsForm
-                        createExpert={this.createExpert}
-                        currentUser={this.state.currentUser}
-                        fieldId={this.state.credentialFieldId}
-                    />
-                :
-                    null
-                }
+              
             </div>
         )
     }

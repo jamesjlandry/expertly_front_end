@@ -39,10 +39,13 @@ export default class NewUser extends React.Component {
         }
         if (this.state.field === '1') {
             this.props.createUser(user)
+            this.props.hideModal()
         } else {
             let field_id = parseInt(this.state.field)
             this.props.createUser(user)
             this.props.handleCredentials(field_id)
+            this.props.handleCredentialModal()
+            this.props.hideModal()
         }
       }
     
