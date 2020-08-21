@@ -48,21 +48,21 @@ export default class NewUser extends React.Component {
     
       render() {
         return (
-          <form className="new_user_modal" onSubmit={this.handleSubmit}>
+          <form className="login_form" onSubmit={this.handleSubmit}>
             <div>
               <label>
                 Username
-                <input onChange={event => this.nameChange(event)} id="username" name="username" type="text" value={this.state.username}/>
+                <input className="login_input" onChange={event => this.nameChange(event)} id="username" name="username" type="text" value={this.state.username}/>
               </label>
             </div>
             <div>
               <label>
                 Password
-                <input onChange={event => this.passwordChange(event)} id="password" name="password" type="password" value={this.state.password}/>
+                <input className="login_input" onChange={event => this.passwordChange(event)} id="password" name="password" type="password" value={this.state.password}/>
               </label>
             </div>
             <div>
-                <select onChange={event => this.fieldChange(event.target.value)} >
+                <select className="login_input" onChange={event => this.fieldChange(event.target.value)} >
                     <option value='1'>Not an Expert</option>
                     <option value='2'>Medical</option>
                     <option value="3">Psychology</option>
@@ -76,7 +76,7 @@ export default class NewUser extends React.Component {
                 </select>
             </div>
             <div>
-              <button type="submit">Create Account</button>
+              <button className="login_input" type="submit">Create Account</button>
             </div>
           </form>
         );

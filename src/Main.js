@@ -19,7 +19,7 @@ export default class Main extends React.Component {
           search: '',
           currentUser: {},
           loggedIn: false, 
-          modal: false,
+          
           credentialModal: false,
           credentialFieldId: 1
         }
@@ -132,11 +132,7 @@ export default class Main extends React.Component {
     // }
 
 
-    showModal = () => {
-        this.setState({
-            modal: !this.state.modal
-        })
-    }
+  
 
     userLogin = async (user) => {
         let response = await fetch('http://localhost:3000/login', {
@@ -245,7 +241,6 @@ export default class Main extends React.Component {
     render () {
 
         let actualFields = this.state.fields.filter(field => field.id !== 1)
-
         return (
             <div>
                 < Header />
@@ -272,16 +267,7 @@ export default class Main extends React.Component {
                     createQuestion={this.createQuestion}
                     createAnswer={this.createAnswer}
                 />
-                {
-                    this.state.modal
-                ?
-                    <NewUser
-                        createUser={this.createUser}
-                        handleCredentials={this.handleCredentials}
-                    />
-                : 
-                    null
-                }
+              
                 {
                     this.state.credentialModal
                 ? 

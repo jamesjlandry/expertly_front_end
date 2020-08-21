@@ -25,6 +25,7 @@ export default class AnswerForm extends React.Component {
             upvotes: 0
         }
         this.props.createAnswer(answer)
+        this.props.answerModal()
       }
     
       render() {

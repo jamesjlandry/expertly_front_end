@@ -16,10 +16,11 @@ export default class Question extends React.Component {
     }
 
     render () {
-        let thisQuestionsAnswers = this.props.answers.filter(answer => answer.field_id === this.props.question.field_id)
+        let thisQuestionsAnswers = this.props.answers.filter(answer => answer.question_id === this.props.question.id)
+        console.log(thisQuestionsAnswers)
         return (
             <div className="questionBox">
-                {this.state.answerModal ? <div> <AnswerForm currentUser={this.props.currentUser} question={this.props.question} createAnswer={this.props.createAnswer}/></div> : null}
+                {this.state.answerModal ? <div> <AnswerForm answerModal={this.answerModal} currentUser={this.props.currentUser} question={this.props.question} createAnswer={this.props.createAnswer}/></div> : null}
                 <div>{this.props.question.text}</div>
                 <div><AnswersContainer question={this.props.question} answers={thisQuestionsAnswers} users={this.props.users}/></div>
                 Are you an Expert? <button className='answer_button' onClick={() => this.answerModal()}>

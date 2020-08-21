@@ -1,14 +1,22 @@
 import React from 'react';
 import UserDetails from '../components/UserDetails'
+import NewUser from '../components/NewUser'
 
 
 export default class ProfileBox extends React.Component {
 
    state = {
        showLogin: false,
+       modal: false,
        username: '',
        password: ''
    }
+
+   showModal = () => {
+    this.setState({
+        modal: !this.state.modal
+    })
+}
 
    handleLogin = () => {
        this.setState({showLogin: !this.state.showLogin})
@@ -32,12 +40,23 @@ export default class ProfileBox extends React.Component {
         password: this.state.password
       }
       this.props.userLogin(user)
+      this.handleLogin()
    }
 
     render () {
 
         return (
             <div className="profile_box">
+                  {
+                    this.state.modal
+                ?
+                    <NewUser
+                        createUser={this.createUser}
+                        handleCredentials={this.handleCredentials}
+                    />
+                : 
+                    null
+                }
                {
                 this.props.userLoggedIn
                 ?
@@ -48,7 +67,7 @@ export default class ProfileBox extends React.Component {
                 :
                 <div className="display_logged_in_out_user" >
                     <button onClick={ () => this.handleLogin()}>Login</button>
-                    <button className="create_user_account" onClick={() => this.props.showModal()}>Create New Account</button>
+                    <button className="create_user_account" onClick={() => this.showModal()}>Create New Account</button>
                 </div>
                 }
                {
