@@ -1,7 +1,6 @@
 import React from 'react';
 import FieldsContainer from './containers/FieldsContainer'
 import QuestionsContainer from './containers/QuestionsContainer'
-import Search from './components/Search'
 import ProfileBox from './containers/ProfileBox'
 import NewUser from './components/NewUser'
 import CredentialsForm from './components/CredentialsForm'
@@ -237,9 +236,8 @@ export default class Main extends React.Component {
             <div>
                 < Header />
                 < ProfileBox userLoggedIn={this.state.loggedIn} handleLogout={this.handleLogout} currentUser={this.state.currentUser} showModal={this.showModal} createUser={this.createUser} userLogin={this.userLogin}/>
-                < Search handleSearch={this.handleSearch}/> 
                 < FieldsContainer fields={actualFields} unfilterField={this.unfilterField} filterField={this.filterField} currentUser={this.state.currentUser}/> 
-                < QuestionsContainer answers={this.state.answers} currentUser={this.state.currentUser} questions={this.state.filteredQuestions} createQuestion={this.createQuestion} createAnswer={this.createAnswer}/>
+                < QuestionsContainer handleSearch={this.handleSearch} answers={this.state.answers} currentUser={this.state.currentUser} questions={this.state.filteredQuestions} createQuestion={this.createQuestion} createAnswer={this.createAnswer}/>
                 {this.state.modal ? < NewUser createUser={this.createUser} handleCredentials={this.handleCredentials}/> : null }
                 {this.state.credentialModal ? < CredentialsForm createExpert={this.createExpert} currentUser={this.state.currentUser}/> : null }
             </div>

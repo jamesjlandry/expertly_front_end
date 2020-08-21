@@ -37,15 +37,29 @@ export default class ProfileBox extends React.Component {
     render () {
 
         return (
-            <div>
-               {this.props.userLoggedIn ? <div className="displayLoggedInOutUser" >Welcome {this.props.currentUser.username} <button className='logout_button' onClick={() => this.props.handleLogout()}>Log Out</button></div> : <div className="displayLoggedInOutUser" onClick={ () => this.handleLogin()}>Log In</div>}
-               {this.state.showLogin ?  <div className="login_form">
-                                            <input onChange={(event) => this.setUsername(event)} type="text" placeholder= "username" value={this.state.username}></input>
-                                            <input onChange={(event) => this.setPassword(event)} type="password" placeholder= "password" value={this.state.password}></input>
-                                            <button onClick={this.submitLogin} className= "login_button" > Make It So</button>
-
-                                        </div> : null}
-                <div className="createUserAccount" onClick={() => this.props.showModal()}>Create New Account</div>
+            <div className="profile_box">
+               {
+                this.props.userLoggedIn
+                ?
+                <div className="displayLoggedInOutUser" >Welcome {this.props.currentUser.username} <button className='logout_button' onClick={() => this.props.handleLogout()}>Log Out</button></div>
+                :
+                <div className="displayLoggedInOutUser" >
+                    <div onClick={ () => this.handleLogin()}>Log In</div>
+                    <div className="createUserAccount" onClick={() => this.props.showModal()}>Create New Account</div>
+                </div>
+                }
+               {
+                this.state.showLogin 
+                ?  
+                    <div className="login_form">
+                        <input onChange={(event) => this.setUsername(event)} type="text" placeholder= "username" value={this.state.username}></input>
+                        <input onChange={(event) => this.setPassword(event)} type="password" placeholder= "password" value={this.state.password}></input>
+                        <button onClick={this.submitLogin} className= "login_button" > Make It So</button>
+                    </div>
+                : 
+                    null
+                }
+                
             </div>
         )
     }
