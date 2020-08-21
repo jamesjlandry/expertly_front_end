@@ -53,30 +53,6 @@ export default class ProfileBox extends React.Component {
 
         return (
             <div className="profile_box">
-                {
-                    this.state.modal
-                ?
-                    <NewUser
-                        createUser={this.props.createUser}
-                        handleCredentials={this.props.handleCredentials}
-                        handleCredentialModal={this.handleCredentialModal}
-                        hideModal={this.showModal}
-                    />
-                : 
-                    null
-                }
-                  {
-                    this.state.credentialModal
-                ? 
-                    <CredentialsForm
-                        createExpert={this.props.createExpert}
-                        currentUser={this.props.currentUser}
-                        fieldId={this.props.credentialFieldId}
-                        handleCredentialModal={this.handleCredentialModal}
-                    />
-                :
-                    null
-                }
                {
                 this.props.userLoggedIn
                 ?
@@ -101,7 +77,30 @@ export default class ProfileBox extends React.Component {
                 : 
                     null
                 }
-                
+                {
+                    this.state.modal
+                ?
+                    <NewUser
+                        createUser={this.props.createUser}
+                        handleCredentials={this.props.handleCredentials}
+                        handleCredentialModal={this.handleCredentialModal}
+                        hideModal={this.showModal}
+                    />
+                : 
+                    null
+                }
+                {
+                    this.state.credentialModal
+                ? 
+                    <CredentialsForm
+                        createExpert={this.props.createExpert}
+                        currentUser={this.props.currentUser}
+                        fieldId={this.props.credentialFieldId}
+                        handleCredentialModal={this.handleCredentialModal}
+                    />
+                :
+                    null
+                }
             </div>
         )
     }
