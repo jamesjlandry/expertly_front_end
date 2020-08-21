@@ -32,15 +32,15 @@ export default class NewUser extends React.Component {
       }
 
       handleSubmit = (e) => {
-          e.preventDefault();
+        e.preventDefault();
         let user = {
             username: this.state.username,
             password: this.state.password,
         }
         if (this.state.field === '1') {
-        this.props.createUser(user)
+            this.props.createUser(user)
         } else {
-          let field_id = parseInt(this.state.field)
+            let field_id = parseInt(this.state.field)
             this.props.createUser(user)
             this.props.handleCredentials(field_id)
         }

@@ -39,7 +39,8 @@ export default class QuestionsContainer extends React.Component {
                 :
                     null
                 }
-                {
+               <div className="questions_container" >
+               {
                     filteredQuestions.map(question => 
                         <Question
                             key={question.id}
@@ -51,6 +52,7 @@ export default class QuestionsContainer extends React.Component {
                         />
                     )
                 }
+                 </div>
             </div>
         )
     }
