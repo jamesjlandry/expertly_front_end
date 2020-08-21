@@ -298,6 +298,7 @@ code {
   background-color: rgb(255, 255, 255);
 
   box-shadow: 1px 2px 5px 1px rgba(85, 85, 199, 0.4);
+  overflow-x: hidden;
 }
 
 .question_bottom {
@@ -320,6 +321,7 @@ code {
   color: rgb(19, 41, 114);
 
   margin-top: 2%;
+  
 }
 
 .answer_form_modal {

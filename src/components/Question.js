@@ -21,7 +21,7 @@ export default class Question extends React.Component {
         return (
             <div className="question_box">
                 
-                {this.props.question.text} {user.map(user => <div>~ {user.username}</div>)}
+                {this.props.question.text} {user.map(user => <div key={user.id}>~ {user.username}</div>)}
                 
                 <div className="question_bottom">
                     <AnswersContainer question={this.props.question} answers={thisQuestionsAnswers} users={this.props.users}/>
