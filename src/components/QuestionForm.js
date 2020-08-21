@@ -40,12 +40,12 @@ export default class QuestionForm extends React.Component {
     
       render() {
         return (
-          <form className='credentials_form_modal' onSubmit={this.handleSubmit}>
+          <form className='question_form_modal' onSubmit={this.handleSubmit}>
             <div>
               <label>
-                Select Question Field
-                <select fieldType={this.state.fieldType} onChange={this.fieldChange}>
-                    <option value=''disabled selected>Make a Selection</option>
+                Select Question Field: 
+                <select value={this.state.fieldType} onChange={this.fieldChange}>
+                    <option value=''>Make a Selection</option>
                     <option value='2'>Medical</option>
                     <option value="3">Psychology</option>
                     <option value="4">Legal</option>
