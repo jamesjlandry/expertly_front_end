@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class Credentials extends React.Component {
+export default class CredentialsForm extends React.Component {
 
     constructor() {
         super();
@@ -41,26 +41,24 @@ export default class Credentials extends React.Component {
             field_id: this.props.fieldId
         }
         this.props.createExpert(credentials)
+        this.props.handleCredentialModal()
         
       }
     
       render() {
         return (
-          <form className='credentials_form_modal' onSubmit={this.handleSubmit}>
+          <form className="login_form" onSubmit={this.handleSubmit}>
             <div>
-              <label>
-                Degree
-                <input onChange={event => this.degreeChange(event)} id="degree" name="degree" type="text" value={this.state.degree}/>
-              </label>
-            </div>
-            <div>
-              <label>
-                Years In Field
-                <input onChange={event => this.yearsInFieldChange(event)} id="yearsInField" name="yearsInField" type="text" value={this.state.yearsInField}/>
-              </label>
-            </div>
-            <div>
-              <button  type="submit">Update Credentials</button>
+    
+                
+                <input className="login_input" onChange={event => this.degreeChange(event)} placeholder="degree" id="degree" name="degree" type="text" value={this.state.degree}/>
+            
+            
+             
+                <input className="login_input" onChange={event => this.yearsInFieldChange(event)} placeholder="years in field" id="yearsInField" name="yearsInField" type="text" value={this.state.yearsInField}/>
+  
+
+              <button  className="login_input" type="submit">Update Credentials</button>
             </div>
           </form>
         );
