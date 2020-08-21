@@ -7,7 +7,8 @@ export default class AnswersContainer extends React.Component {
     render () {
 
         return (
-            <div>
+            <div className="div_with_scroll">
+                
                 {this.props.answers.map(answer => <Answer key={answer.id} answer={answer} users={this.props.users}/>)}
             </div>
         )

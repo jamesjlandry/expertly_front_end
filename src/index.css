@@ -276,7 +276,7 @@ code {
   float: right;
   position: relative;
 
-  height: fit-content;
+  height: 30%;
   width: 50%;
 
   align-content: center;
@@ -315,7 +315,7 @@ code {
   background-color: lightblue;
 
   font-family: 'Chivo', sans-serif;
-  font-size: 100%;
+  font-size: 80%;
   
   color: rgb(19, 41, 114);
 
@@ -333,4 +333,24 @@ code {
 
   align-items: center;
   text-align: center;
+}
+
+.div_with_scroll {
+  border-right: 1px solid lightcyan;
+  height: 80%;
+  width: 70%;
+  overflow:scroll;
+  overflow-x:hidden;
+  font-size: 80%;
+  padding: 4px;
+}
+
+.answer_name {
+  font-weight: bold;
+}
+
+.answer {
+  border: 1px solid rgb(19, 41, 114);
+  margin-bottom: 4px;
+  padding: 1px
 }
