@@ -8,7 +8,7 @@ export default class AnswersContainer extends React.Component {
 
         return (
             <div>
-                
+                {this.props.answers.map(answer => <Answer answer={answer} users={this.props.users}/>)}
             </div>
         )
     }

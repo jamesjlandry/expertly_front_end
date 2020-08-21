@@ -1,5 +1,6 @@
 import React from 'react'
 import AnswerForm from '../components/AnswerForm'
+import AnswersContainer from '../containers/AnswersContainer'
 
 
 export default class Question extends React.Component {
@@ -15,11 +16,12 @@ export default class Question extends React.Component {
     }
 
     render () {
-        let answers = this.props.answers.filter(answer => answer.field_id === this.props.question.field_id)
+        let thisQuestionsAnswers = this.props.answers.filter(answer => answer.field_id === this.props.question.field_id)
         return (
             <div className="questionBox">
                 {this.state.answerModal ? <div> <AnswerForm currentUser={this.props.currentUser} question={this.props.question} createAnswer={this.props.createAnswer}/></div> : null}
                 <div>{this.props.question.text}</div>
+                <div><AnswersContainer question={this.props.question} answers={thisQuestionsAnswers} users={this.props.users}/></div>
                 Are you an Expert? <button className='answer_button' onClick={() => this.answerModal()}>
                     Answer Question
                 </button>
