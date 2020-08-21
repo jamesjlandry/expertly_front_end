@@ -76,7 +76,7 @@ export default class NewUser extends React.Component {
                 </select>
             </div>
             <div>
-              <button  type="submit">Create Account</button>
+              <button type="submit">Create Account</button>
             </div>
           </form>
         );
