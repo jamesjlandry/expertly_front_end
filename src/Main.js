@@ -16,7 +16,7 @@ export default class Main extends React.Component {
           answers:[],
           users: [],
           fields: [],
-          search: '',
+         
           currentUser: {},
           loggedIn: false, 
           
@@ -169,9 +169,7 @@ export default class Main extends React.Component {
         })
     }
 
-    handleSearch = (e)=> {
-        this.setState({search: e.target.value.toLowerCase()})
-    }
+ 
 
     createQuestion = async (question) => {
         let response = await fetch('http://localhost:3000/questions', {
@@ -259,7 +257,6 @@ export default class Main extends React.Component {
                     currentUser={this.state.currentUser}
                 /> 
                 <QuestionsContainer 
-                    handleSearch={this.handleSearch}
                     users={this.state.users}
                     answers={this.state.answers}
                     currentUser={this.state.currentUser}
