@@ -14,17 +14,20 @@ export default class Main extends React.Component {
           questions: [],
           filteredQuestions: [],
           answers:[],
+          users: [],
           fields: [],
           search: '',
           currentUser: {},
           loggedIn: false, 
           modal: false,
-          credentialModal: false
+          credentialModal: false,
+          credentialFieldId: 1
         }
     }
 
     componentDidMount() {
         this.getFields();
+        this.getUsers();
         this.getQuestions();
         this.getAnswers();
         this.getCredentials()
@@ -76,8 +79,8 @@ export default class Main extends React.Component {
 
  
 
-    handleCredentials = (user) => {
-        this.setState({credentialModal: !this.state.credentialModal, modal: !this.state.modal})
+    handleCredentials = (field_id) => {
+        this.setState({credentialModal: !this.state.credentialModal, modal: !this.state.modal, credentialFieldId: field_id})
     }
 
     getFields = () => {
@@ -102,6 +105,14 @@ export default class Main extends React.Component {
         })
     .then(res => res.json())
     .then(answers => this.setState({answers}))
+    }
+
+    getUsers = () => {
+        fetch('http://localhost:3000/users', {
+            credentials: 'include'
+        })
+    .then(res => res.json())
+    .then(users => this.setState({users}))
     }
 
     getCredentials = () => {
@@ -138,19 +149,19 @@ export default class Main extends React.Component {
             body: JSON.stringify(user)
         })
         let currentUser = await response.json()
-        if (currentUser.error === "Not Found") {
-            alert('User Not Found')
-
-        } else {
+        console.log(currentUser)
+        if (currentUser.username === user.username) {
         this.setState({
             currentUser,
             loggedIn: true
-        }
-        )}
+        })
+    } else{
+        alert("username or password incorrect")
+    }
     }
 
     handleLogout = async () => {
-        let response = await fetch('http://localhost:3000/logout', {
+        let response = await fetch('http://localhost:3000/log_out', {
             credentials: 'include',
             method: 'DELETE'
         })
@@ -194,6 +205,9 @@ export default class Main extends React.Component {
             body: JSON.stringify({answer: answer})
         })
         let newAnswer = await response.json()
+        if(newAnswer.message) {
+            alert('you must be an expert in this field to answer')
+        }
         this.setState({
             answers: [newAnswer, ...this.state.answers]
         })
@@ -237,9 +251,9 @@ export default class Main extends React.Component {
                 < Header />
                 < ProfileBox userLoggedIn={this.state.loggedIn} handleLogout={this.handleLogout} currentUser={this.state.currentUser} showModal={this.showModal} createUser={this.createUser} userLogin={this.userLogin}/>
                 < FieldsContainer fields={actualFields} unfilterField={this.unfilterField} filterField={this.filterField} currentUser={this.state.currentUser}/> 
-                < QuestionsContainer handleSearch={this.handleSearch} answers={this.state.answers} currentUser={this.state.currentUser} questions={this.state.filteredQuestions} createQuestion={this.createQuestion} createAnswer={this.createAnswer}/>
+                < QuestionsContainer  handleSearch={this.handleSearch} users={this.state.users} answers={this.state.answers} currentUser={this.state.currentUser} questions={this.state.filteredQuestions} createQuestion={this.createQuestion} createAnswer={this.createAnswer}/>
                 {this.state.modal ? < NewUser createUser={this.createUser} handleCredentials={this.handleCredentials}/> : null }
-                {this.state.credentialModal ? < CredentialsForm createExpert={this.createExpert} currentUser={this.state.currentUser}/> : null }
+                {this.state.credentialModal ? < CredentialsForm createExpert={this.createExpert} currentUser={this.state.currentUser} fieldId={this.state.credentialFieldId}/> : null }
             </div>
         )
     }

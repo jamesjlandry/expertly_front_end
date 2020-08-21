@@ -36,8 +36,9 @@ export default class Credentials extends React.Component {
           e.preventDefault();
         let credentials = {
             degree: this.state.degree,
-            yearsInField: this.state.yearsInField,
-            user_id: this.props.currentUser.id
+            years_in_field: this.state.yearsInField,
+            user_id: this.props.currentUser.id, 
+            field_id: this.props.fieldId
         }
         this.props.createExpert(credentials)
         

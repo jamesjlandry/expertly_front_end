@@ -24,7 +24,7 @@ export default class QuestionsContainer extends React.Component {
                     <button className='question_button' onClick={() => this.openQuestionModal()}>Ask a Question</button>
                 </div>
                 {this.state.questionModal ? <QuestionForm createQuestion={this.props.createQuestion} closeQuestionModal={this.openQuestionModal} currentUser={this.props.currentUser}/> : null}
-                {this.props.questions.map(question => <Question key={question.id} question={question} currentUser={this.props.currentUser} answers={this.props.answers} createAnswer={this.props.createAnswer}/>)}
+                {this.props.questions.map(question => <Question key={question.id} question={question} currentUser={this.props.currentUser} answers={this.props.answers} createAnswer={this.props.createAnswer} users={this.props.users}/>)}
             </div>
         )
     }
