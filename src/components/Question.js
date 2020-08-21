@@ -20,11 +20,24 @@ export default class Question extends React.Component {
         let user = this.props.users.filter(user => user.id === this.props.question.user_id)
         return (
             <div className="question_box">
-            {this.state.answerModal ? <div> <AnswerForm answerModal={this.answerModal} currentUser={this.props.currentUser} question={this.props.question} createAnswer={this.props.createAnswer}/></div> : null}
-        <div>{this.props.question.text} {user.map(user => <div>~ {user.username}</div>)}</div>
-                <div><AnswersContainer question={this.props.question} answers={thisQuestionsAnswers} users={this.props.users}/></div>
+                
+                {this.props.question.text} {user.map(user => <div>~ {user.username}</div>)}
+                
                 <div className="question_bottom">
-                    <div>Are you an Expert?</div>
+                    <AnswersContainer question={this.props.question} answers={thisQuestionsAnswers} users={this.props.users}/>
+                    {
+                        this.state.answerModal
+                    ?
+                        <AnswerForm
+                            answerModal={this.answerModal}
+                            currentUser={this.props.currentUser}
+                            question={this.props.question}
+                            createAnswer={this.props.createAnswer}
+                        />
+                    :
+                        <div>Are you an Expert?</div>
+                    }
+                    
                     <button className='answer_button' onClick={() => this.answerModal()}>Answer Question</button>
                 </div>
             </div>
