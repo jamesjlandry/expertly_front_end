@@ -249,11 +249,50 @@ export default class Main extends React.Component {
         return (
             <div>
                 < Header />
-                < ProfileBox userLoggedIn={this.state.loggedIn} handleLogout={this.handleLogout} currentUser={this.state.currentUser} showModal={this.showModal} createUser={this.createUser} userLogin={this.userLogin}/>
-                < FieldsContainer fields={actualFields} unfilterField={this.unfilterField} filterField={this.filterField} currentUser={this.state.currentUser}/> 
-                < QuestionsContainer  handleSearch={this.handleSearch} users={this.state.users} answers={this.state.answers} currentUser={this.state.currentUser} questions={this.state.filteredQuestions} createQuestion={this.createQuestion} createAnswer={this.createAnswer}/>
-                {this.state.modal ? < NewUser createUser={this.createUser} handleCredentials={this.handleCredentials}/> : null }
-                {this.state.credentialModal ? < CredentialsForm createExpert={this.createExpert} currentUser={this.state.currentUser} fieldId={this.state.credentialFieldId}/> : null }
+                <ProfileBox
+                    userLoggedIn={this.state.loggedIn}
+                    handleLogout={this.handleLogout}
+                    currentUser={this.state.currentUser}
+                    showModal={this.showModal}
+                    createUser={this.createUser}
+                    userLogin={this.userLogin}
+                />
+                <FieldsContainer
+                    fields={actualFields}
+                    unfilterField={this.unfilterField}
+                    filterField={this.filterField}
+                    currentUser={this.state.currentUser}
+                /> 
+                <QuestionsContainer 
+                    handleSearch={this.handleSearch}
+                    users={this.state.users}
+                    answers={this.state.answers}
+                    currentUser={this.state.currentUser}
+                    questions={this.state.filteredQuestions}
+                    createQuestion={this.createQuestion}
+                    createAnswer={this.createAnswer}
+                />
+                {
+                    this.state.modal
+                ?
+                    <NewUser
+                        createUser={this.createUser}
+                        handleCredentials={this.handleCredentials}
+                    />
+                : 
+                    null
+                }
+                {
+                    this.state.credentialModal
+                ? 
+                    <CredentialsForm
+                        createExpert={this.createExpert}
+                        currentUser={this.state.currentUser}
+                        fieldId={this.state.credentialFieldId}
+                    />
+                :
+                    null
+                }
             </div>
         )
     }

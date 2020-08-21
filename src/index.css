@@ -9,11 +9,12 @@ button {
 
   font-family: 'Kanit', sans-serif;
   font-weight: bold;
+  font-size: 80%;
   color: rgb(19, 41, 114)
 }
 
 button:hover {
-  box-shadow: 1px 2px 5px 2px rgba(85, 85, 199, 0.4);
+  box-shadow: 0 0 5px rgba(85, 85, 199, 0.8);
 }
 
 body {
@@ -42,31 +43,83 @@ code {
   align-items: center;
   text-align: center;
 
-  margin-bottom: 2%;
+  margin-bottom: 0;
+  padding-bottom: 2%;
 
   font-family: 'Kanit', sans-serif;
   color: lightcyan;
 
-  background: rgba(85, 85, 199, 0.6);
-
-  box-shadow: 0 2px 4px 2px rgba(85, 85, 199, 0.8);
+  background: rgb(121 137 211);
 }
 
 .profile_box {
-  display: flex;
-  flex-flow: wrap column;
+  display:block;
 
-  margin-bottom: 5px;
+  height: 80px;
+  margin-bottom: 2%;
 
-  height: 30px;
-  width: 100%
+  border-bottom: 10px solid rgb(121 137 211);
+  border-left: 80px solid rgb(121 137 211);
+
+  background-color: lightcyan;
 }
 
-.displayLoggedInOutUser {
-  float: right;
+.welcome_message {
+  display: flex;
+  flex-flow: column wrap;
 
-  height: 30px;
-  width: 140px
+  width: 79%;
+  height: 30%;
+
+  justify-content: center;
+  font-family: 'Chivo', sans-serif;
+  text-align: center;
+  font-size: 100%;
+  font-weight: bold;
+
+  background-color: lightcyan;
+  color: rgb(19, 41, 114);
+}
+
+.login_form {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  float:right;
+
+  padding-right: 31%;
+
+  height: 100%;
+  width: 10%;
+}
+
+.display_logged_in_out_user {
+  display: flex;
+  flex-flow: column;
+  float: right;
+  align-items: center;
+  
+  height: 100%;
+  width: 15em;
+
+  background-color: rgb(121 137 211);
+}
+
+.display_logged_in_out_user button {
+  width: 80%;
+  height: 50%;
+}
+
+.login_input {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.create_user_account {
+  border-top: 4px solid rgb(121 137 211);
 }
 
 .search_and_question_nav {
@@ -79,12 +132,17 @@ code {
 }
 
 .searchbar {
+  text-align: center;
+  font-size: 80%;
+
   width: 65%
 }
 
 .question_button {
-  height: 30px;
-  width: 20%;
+  height: 40px;
+  width: 25%;
+
+  font-size: 80%;
 }
 
 .expert_fields_header {
@@ -99,7 +157,7 @@ code {
   
   width: 100%;
 
-  background: rgba(85, 85, 199, 0.6);
+  background: rgb(121 137 211);
   color: lightcyan;
 }
 
@@ -134,6 +192,8 @@ code {
 .field_li {
   display: flex;
   flex-flow: column wrap;
+  padding-top: 2px;
+  padding-bottom: 2px;
   
   text-align: center;
   align-items: center;
@@ -152,7 +212,7 @@ code {
   justify-content: center;
 
   font-family: 'Chivo', sans-serif;
-  font-size: 18px;
+  font-size: 100%;
   font-weight: bold;
   color: rgb(19, 41, 114)
 }

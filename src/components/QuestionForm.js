@@ -65,7 +65,7 @@ export default class QuestionForm extends React.Component {
               </label>
             </div>
             <div>
-              <button  type="submit">Submit Question</button>
+              <button type="submit">Submit Question</button>
             </div>
           </form>
         );

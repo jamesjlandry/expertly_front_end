@@ -41,21 +41,24 @@ export default class ProfileBox extends React.Component {
                {
                 this.props.userLoggedIn
                 ?
-                <div className="displayLoggedInOutUser" >Welcome {this.props.currentUser.username} <button className='logout_button' onClick={() => this.props.handleLogout()}>Log Out</button></div>
+                <div className="display_logged_in_out_user" >
+                    <div className="welcome_message" >Welcome {this.props.currentUser.username}</div>
+                    <button className='logout_button' onClick={() => this.props.handleLogout()}>Log Out</button>
+                </div>
                 :
-                <div className="displayLoggedInOutUser" >
-                    <div onClick={ () => this.handleLogin()}>Log In</div>
-                    <div className="createUserAccount" onClick={() => this.props.showModal()}>Create New Account</div>
+                <div className="display_logged_in_out_user" >
+                    <button onClick={ () => this.handleLogin()}>Login</button>
+                    <button className="create_user_account" onClick={() => this.props.showModal()}>Create New Account</button>
                 </div>
                 }
                {
                 this.state.showLogin 
                 ?  
-                    <div className="login_form">
-                        <input onChange={(event) => this.setUsername(event)} type="text" placeholder= "username" value={this.state.username}></input>
-                        <input onChange={(event) => this.setPassword(event)} type="password" placeholder= "password" value={this.state.password}></input>
-                        <button onClick={this.submitLogin} className= "login_button" > Make It So</button>
-                    </div>
+                <div className="login_form">
+                    <input className="login_input" onChange={(event) => this.setUsername(event)} type="text" placeholder= "username" value={this.state.username}></input>
+                    <input className="login_input" onChange={(event) => this.setPassword(event)} type="password" placeholder= "password" value={this.state.password}></input>
+                    <button className="login_input" onClick={this.submitLogin} >Login</button>
+                </div>
                 : 
                     null
                 }
