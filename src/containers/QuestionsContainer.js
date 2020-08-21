@@ -6,7 +6,8 @@ import Search from '../components/Search'
 export default class QuestionsContainer extends React.Component {
 
     state = {
-        questionModal: false
+        questionModal: false,
+        search: '',
     }
 
     openQuestionModal = () => {
@@ -15,12 +16,16 @@ export default class QuestionsContainer extends React.Component {
         })
     }
 
-    render () {
+    handleSearch = (e)=> {
+        this.setState({search: e.target.value.toLowerCase()})
+    }
 
+    render () {
+        let filteredQuestions = this.props.questions.filter(question => question.text.toLowerCase().includes(this.state.search))
         return (
             <div className="top_nav">
                 <div className="search_and_question_nav">
-                    <Search handleSearch={this.props.handleSearch} /> 
+                    <Search handleSearch={this.handleSearch} /> 
                     <button className='question_button' onClick={() => this.openQuestionModal()}>Ask a Question</button>
                 </div>
                 {
@@ -35,7 +40,7 @@ export default class QuestionsContainer extends React.Component {
                     null
                 }
                 {
-                    this.props.questions.map(question => 
+                    filteredQuestions.map(question => 
                         <Question
                             key={question.id}
                             question={question}
