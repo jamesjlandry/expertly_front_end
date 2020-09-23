@@ -53,6 +53,7 @@ export default class QuestionsContainer extends React.Component {
                             answers={this.props.answers}
                             createAnswer={this.props.createAnswer}
                             users={this.props.users}
+                            fields={this.props.fields}
                         />
                     )
                 }

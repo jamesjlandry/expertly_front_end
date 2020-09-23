@@ -18,10 +18,11 @@ export default class Question extends React.Component {
     render () {
         let thisQuestionsAnswers = this.props.answers.filter(answer => answer.question_id === this.props.question.id)
         let user = this.props.users.filter(user => user.id === this.props.question.user_id)
+        let questionField = this.props.fields.find(field => this.props.question.field_id === field.id)
         return (
             <div className="question_box">
                 
-                {this.props.question.text} {user.map(user => <div key={user.id}>~ {user.username}</div>)}
+               <div className='field_type_div'> {questionField.field_type} </div> {this.props.question.text} {user.map(user => <div key={user.id}>~ {user.username}</div>)}
                 
                 <div className="question_bottom">
                     <AnswersContainer question={this.props.question} answers={thisQuestionsAnswers} users={this.props.users}/>

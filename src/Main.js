@@ -185,9 +185,6 @@ export default class Main extends React.Component {
             body: JSON.stringify({ answer: answer })
         })
         let newAnswer = await response.json()
-        if (newAnswer.message) {
-            alert('you must be an expert in this field to answer')
-        }
         this.setState({
             answers: [newAnswer, ...this.state.answers]
         })
@@ -237,6 +234,7 @@ export default class Main extends React.Component {
                     userLogin={this.userLogin}
                     handleCredentials={this.handleCredentials}
                     createExpert={this.createExpert}
+                    credentialFieldId={this.state.credentialFieldId}
                 />
                 <FieldsContainer
                     fields={actualFields}
@@ -251,6 +249,7 @@ export default class Main extends React.Component {
                     questions={this.state.filteredQuestions}
                     createQuestion={this.createQuestion}
                     createAnswer={this.createAnswer}
+                    fields={this.state.fields}
                 />
 
 
