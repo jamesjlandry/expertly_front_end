@@ -54,16 +54,17 @@ export default class ProfileBox extends React.Component {
         return (
             <div className="profile_box">
                {
-                this.props.userLoggedIn
+                this.props.userLoggedIn === false
                 ?
-                <div className="display_logged_in_out_user" >
-                    <div className="welcome_message" >Welcome {this.props.currentUser.username}</div>
-                    <button className='logout_button' onClick={() => this.props.handleLogout()}>Log Out</button>
-                </div>
-                :
                 <div className="display_logged_in_out_user" >
                     <button onClick={ () => this.handleLogin()}>Login</button>
                     <button className="create_user_account" onClick={() => this.showModal()}>Create New Account</button>
+                </div>
+                
+                :
+                <div className="display_logged_in_out_user" >
+                    <div className="welcome_message" >Welcome {this.props.currentUser.username}</div>
+                    <button className='logout_button' onClick={() => this.props.handleLogout()}>Log Out</button>
                 </div>
                 }
                {

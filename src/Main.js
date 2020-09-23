@@ -7,21 +7,18 @@ import CredentialsForm from './components/CredentialsForm'
 import Header from './containers/Header'
 
 export default class Main extends React.Component {
-    
+
     constructor() {
         super()
         this.state = {
-          questions: [],
-          filteredQuestions: [],
-          answers:[],
-          users: [],
-          fields: [],
-         
-          currentUser: {},
-          loggedIn: false, 
-          
-          
-          credentialFieldId: 1
+            questions: [],
+            filteredQuestions: [],
+            answers: [],
+            users: [],
+            fields: [],
+            currentUser: {},
+            loggedIn: false,
+            credentialFieldId: 1
         }
     }
 
@@ -34,30 +31,19 @@ export default class Main extends React.Component {
         this.loggedIn()
     }
 
-    // // what strong params is looking for
-    // // the request body *contains* the user
-    // body = {
-    //     user: {
-    //         username: 'James'
-    //     }
-    // }
-  
-
-    // // what you're sending
-    // // the request body *is* the user
-    // body = {
-    //     username: 'James'
-    // }
+   
 
     loggedIn = async () => {
         let response = await fetch('http://localhost:3000/logged_in', {
             'credentials': 'include'
         })
         let currentUser = await response.json()
-        this.setState({
-            currentUser,
-            loggedIn: true
-        })
+        if (currentUser !== null) {
+            this.setState({
+                currentUser,
+                loggedIn: true
+            })
+        }
     }
 
     createUser = (user) => {
@@ -70,57 +56,57 @@ export default class Main extends React.Component {
             },
             body: JSON.stringify(user)
         })
-        .then(res => res.json())
-        .then(user => {
-           this.setState({ currentUser: user, loggedIn: true})
-           
-        })
+            .then(res => res.json())
+            .then(user => {
+                this.setState({ currentUser: user, loggedIn: true })
+
+            })
     }
 
- 
+
 
     handleCredentials = (field_id) => {
-        this.setState({credentialFieldId: field_id})
+        this.setState({ credentialFieldId: field_id })
     }
 
     getFields = () => {
         fetch('http://localhost:3000/fields', {
             credentials: 'include'
         })
-    .then(res => res.json())
-    .then(fields => this.setState({fields}))
+            .then(res => res.json())
+            .then(fields => this.setState({ fields }))
     }
 
     getQuestions = () => {
         fetch('http://localhost:3000/questions', {
             credentials: 'include'
         })
-    .then(res => res.json())
-    .then(questions => this.setState({questions, filteredQuestions: questions}))
+            .then(res => res.json())
+            .then(questions => this.setState({ questions, filteredQuestions: questions }))
     }
 
     getAnswers = () => {
         fetch('http://localhost:3000/answers', {
             credentials: 'include'
         })
-    .then(res => res.json())
-    .then(answers => this.setState({answers}))
+            .then(res => res.json())
+            .then(answers => this.setState({ answers }))
     }
 
     getUsers = () => {
         fetch('http://localhost:3000/users', {
             credentials: 'include'
         })
-    .then(res => res.json())
-    .then(users => this.setState({users}))
+            .then(res => res.json())
+            .then(users => this.setState({ users }))
     }
 
     getCredentials = () => {
         fetch('http://localhost:3000/credentials', {
             credentials: 'include'
         })
-    .then(res => res.json())
-    .then(credentials => this.setState({credentials}))
+            .then(res => res.json())
+            .then(credentials => this.setState({ credentials }))
     }
 
     // getUsers = () => {
@@ -132,28 +118,28 @@ export default class Main extends React.Component {
     // }
 
 
-  
+
 
     userLogin = async (user) => {
         let response = await fetch('http://localhost:3000/login', {
             'credentials': 'include',
             method: "POST",
             headers: {
-               accept: 'application/json',
-               'content-type': 'application/json' 
+                accept: 'application/json',
+                'content-type': 'application/json'
             },
             body: JSON.stringify(user)
         })
         let currentUser = await response.json()
         console.log(currentUser)
         if (currentUser.username === user.username) {
-        this.setState({
-            currentUser,
-            loggedIn: true
-        })
-    } else{
-        alert("username or password incorrect")
-    }
+            this.setState({
+                currentUser,
+                loggedIn: true
+            })
+        } else {
+            alert("username or password incorrect")
+        }
     }
 
     handleLogout = async () => {
@@ -165,11 +151,11 @@ export default class Main extends React.Component {
         console.log(loggedOut)
         this.setState({
             currentUser: {},
-            loggedIn: false 
+            loggedIn: false
         })
     }
 
- 
+
 
     createQuestion = async (question) => {
         let response = await fetch('http://localhost:3000/questions', {
@@ -179,13 +165,13 @@ export default class Main extends React.Component {
                 accept: 'application/json',
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({question: question})
+            body: JSON.stringify({ question: question })
         })
         let newQuestion = await response.json()
         this.setState({
             questions: [newQuestion, ...this.state.questions]
         })
-       
+
     }
 
     createAnswer = async (answer) => {
@@ -196,16 +182,16 @@ export default class Main extends React.Component {
                 accept: 'application/json',
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({answer: answer})
+            body: JSON.stringify({ answer: answer })
         })
         let newAnswer = await response.json()
-        if(newAnswer.message) {
+        if (newAnswer.message) {
             alert('you must be an expert in this field to answer')
         }
         this.setState({
             answers: [newAnswer, ...this.state.answers]
         })
-       
+
     }
 
     createExpert = (credentials) => {
@@ -216,18 +202,18 @@ export default class Main extends React.Component {
                 accept: 'application/json',
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({credentials, user_id: this.state.currentUser.id})
+            body: JSON.stringify({ credentials, user_id: this.state.currentUser.id })
         })
-        .then(res => res.json())
-        .then(currentUser => {
-            this.setState({currentUser})
-        })
+            .then(res => res.json())
+            .then(currentUser => {
+                this.setState({ currentUser })
+            })
         this.handleCredentials()
     }
 
     filterField = (field_id) => {
-        let  filteredQuestions = this.state.questions.filter(question => question.field_id === field_id)
-        this.setState({filteredQuestions})
+        let filteredQuestions = this.state.questions.filter(question => question.field_id === field_id)
+        this.setState({ filteredQuestions })
     }
 
     unfilterField = () => {
@@ -236,7 +222,7 @@ export default class Main extends React.Component {
         })
     }
 
-    render () {
+    render() {
 
         let actualFields = this.state.fields.filter(field => field.id !== 1)
         return (
@@ -257,8 +243,8 @@ export default class Main extends React.Component {
                     unfilterField={this.unfilterField}
                     filterField={this.filterField}
                     currentUser={this.state.currentUser}
-                /> 
-                <QuestionsContainer 
+                />
+                <QuestionsContainer
                     users={this.state.users}
                     answers={this.state.answers}
                     currentUser={this.state.currentUser}
@@ -266,8 +252,8 @@ export default class Main extends React.Component {
                     createQuestion={this.createQuestion}
                     createAnswer={this.createAnswer}
                 />
-              
-              
+
+
             </div>
         )
     }

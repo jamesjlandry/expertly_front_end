@@ -22,6 +22,10 @@ export default class QuestionsContainer extends React.Component {
 
     render () {
         let filteredQuestions = this.props.questions.filter(question => question.text.toLowerCase().includes(this.state.search))
+        filteredQuestions = filteredQuestions.sort((a, b) => {
+            return b.id - a.id
+        })
+        console.log(filteredQuestions)
         return (
             <div className="top_nav">
                 <div className="search_and_question_nav">
